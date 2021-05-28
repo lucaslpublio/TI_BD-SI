@@ -1,9 +1,12 @@
+package java.dao;
+
+import java.Pessoa.Pessoa;
 import java.sql.*;
 
-public class DAO {
+public class PessoaDAO {
 	private Connection conexao;
 	
-	public DAO() {
+	public PessoaDAO() {
 		conexao = null;
 	}
 	
@@ -43,12 +46,12 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean inserirUsuario(Usuario usuario) {
+	public boolean inserirPessoa(Pessoa pessoa) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("INSERT INTO Usuario (login, senha) "
-					       + "VALUES ("+Usuario.getLogin()+ ", " + Usuario.getSenha() + ");");
+			st.executeUpdate("INSERT INTO Pessoa (id, nome, email, login) "
+					       + "VALUES (" +pessoa.getId() + ", " + pessoa.getNome() + ", " + pessoa.getEmail() + ", " + pessoa.getLogin() + ");");
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -57,12 +60,14 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean atualizarUsuario(Usuario usuario) {
+	public boolean atualizarPessoa(Pessoa pessoa) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE Usuario SET Login = '" + Usuario.getLogin() + "', Senha = '"  
-				       + Usuario.getSenha();
+			String sql = "UPDATE Usuario SET Login = '" + pessoa.getLogin() + "', Email = '"  
+				       + pessoa.getEmail() + "', Nome = '"  
+				       + pessoa.getNome() + "', Id = '"  
+				       + pessoa.getId();
 			st.executeUpdate(sql);
 			st.close();
 			status = true;
@@ -72,11 +77,11 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean excluirUsuario(int codigo) {
+	public boolean excluirPessoa(int codigo) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM Usuario WHERE Login = " + Login);
+			st.executeUpdate("DELETE FROM Pessoa WHERE Id = " + codigo);
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -86,19 +91,19 @@ public class DAO {
 	}
 	
 	
-	public Usuario[] getUsuarios() {
-		Usuario[] usuarios = null;
+	public Usuario[] getPessoas() {
+		Usuario[] pessoas = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM Usuario");		
+			ResultSet rs = st.executeQuery("SELECT * FROM Pessoa");		
 	         if(rs.next()){
 	             rs.last();
-	             Usuarios = new Usuario[rs.getRow()];
+	             usuarios = new Usuario[rs.getRow()];
 	             rs.beforeFirst();
 
 	             for(int i = 0; rs.next(); i++) {
-	                usuarios[i] = new Usuario(rs.getString("Login"), rs.getString("Senha"));
+	                pessoas[i] = new Usuario(rs.getInt("Id"), rs.getString("Nome"), rs.getString("Email"),  rs.getString("Login"));
 	             }
 	          }
 	          st.close();

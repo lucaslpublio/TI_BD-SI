@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/src/main/resources/Site/Login/estiloLogin.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div id="header">
+      <div class="container col-12">
+        <div class="row">
+  
+          <div class="col-lg-3 col-md-12 col-sm-12 logoBlock">
+            <div class="logo">
+              <h1><img src="/Site/Imagens/logo.png" class="imagemLogo" style="margin-top: -10px;">ich Investment</h1>
+  
+            </div>
+          </div>
+  
+          <div class="col-lg-6 col-md-12 col-sm-12 menuBlock">
+            <div class="menu">
+  
+              <nav class="navMenu">
+                <a href="/Site/index.html">Home</a>
+                <a href="/Site/equipe.html">Equipe</a>
+                <a href="/Site/empresa.html">Empresa</a>
+                <a href="/Site/objetivo.html">Carteira Virtual</a>
+            </nav>
+  
+            </div>
+          </div>
+  
+          <div class="col-lg-3 col-md-12 col-sm-12 loginBlock">
+            <div class="login">
+              <nav>
+                <a href="/Site/Login/paginaDeRegistro.html">Register</a>
+                <a class="active" href="/Site/Login/paginaLogin.html">Login</a>
+              </nav>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  
+      
+    <div class = "container">
+        <div class = "row formularioLogin2">
+            <form class = "container" id = "login" method="post"  onsubmit="loginUser (this)">
+            
+              <div class="form-group">
+                 <label for="email">Email</label>
+                 <input type="email" class="form-control" id="email"  name = "email" autocomplete="off">
+              </div>
+              <div class="form-group">
+                  <label for= "senha">Senha</label>
+                  <input type= "password" class= "form-control" id="senha"  name = "senha" >
+              </div>
+              
+              <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="manterConectado">
+                  <label class="form-check-label" for="manterConectado">Mantenha-me conectado</label>
+                </div>
+                <button class="btn btn-primary button2" type = "submit">Login</button>
+              </form>
+        </div>
+        </div>
+
+        <script src="login.js"></script>
+        <script>
+            
+            // Declara uma função para processar o formulário de login
+            function processaFormLogin (event) {                
+                    // Cancela a submissão do formulário para tratar sem fazer refresh da tela
+                    event.preventDefault ();
+    
+                    // Obtem os dados de login e senha a partir do formulário de login
+                    var username = document.getElementById('email').value;
+                    var password = document.getElementById('senha').value;
+    
+                    // Valida login e se estiver ok, redireciona para tela inicial da aplicação
+                    resultadoLogin = loginUser (email, enha);
+                    if (resultadoLogin) {
+                        window.location.href = 'index.html';
+                    }
+                    else { // Se login falhou, avisa ao usuário
+                        alert ('Usuário ou senha incorretos');
+                    }
+            }  
+            function salvaLogin (event) {
+                // Cancela a submissão do formulário para tratar sem fazer refresh da tela
+                event.preventDefault ();
+    
+                // Obtem os dados do formulário
+                let email  = document.getElementById('email').value;
+                let nome   = document.getElementById('nome').value;
+                let sobrenome  = document.getElementById('sobrenome').value;
+                let senha  = document.getElementById('senha').value;
+                let senha2 = document.getElementById('senha2').value;
+                if (senha != senha2) {
+                    alert ('As senhas informadas não conferem.');
+                    return
+                }
+    
+                // Adiciona o usuário no banco de dados
+                addUser (nome, login, senha, email);
+                alert ('Usuário salvo com sucesso. Proceda com o login para ');
+    
+                // Oculta a div modal do login
+                //document.getElementById ('loginModal').style.display = 'none';
+                $('#loginModal').modal('hide');
+            }
+    
+            // Associa a funçao processaFormLogin  formulário adicionado um manipulador do evento submit
+            document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
+    
+    
+            // Associar salvamento ao botao
+            document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);        
+        </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
