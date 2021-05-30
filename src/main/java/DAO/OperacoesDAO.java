@@ -1,6 +1,6 @@
 package java.DAO;
 
-import java.Usuario.Operacoes;
+import java.Classes.Operacoes;
 import java.sql.*;
 
 public class OperacoesDAO {

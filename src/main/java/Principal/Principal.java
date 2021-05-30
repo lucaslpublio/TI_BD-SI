@@ -1,7 +1,7 @@
 package java.Principal;
 
 import java.DAO.UsuarioDAO;
-import java.Usuario.Usuario;
+import java.Classes.Usuario;
 
 public class Principal {
     public static void main(String[] args) {

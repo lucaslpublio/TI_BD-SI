@@ -1,4 +1,4 @@
-package java.Usuario;
+package java.Classes;
 
 public class Usuario {
 	private String login;
